@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>💘 Valentine</title>
+  <title>💘 Will You be my Valentine?</title>
   <style>
     body {
       margin: 0;
@@ -21,8 +21,9 @@
       border-radius: 24px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      width: 300px;
+      width: min(1100px, 90vw);
       position: relative;
+      overflow: visible;
     }
 
     h1 {
@@ -65,42 +66,178 @@
       right: 20px;
       top: 10px;
     }
+
+    /* 🐱 고양이 캐릭터 */
+    .character {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+      animation: float 2.5s ease-in-out infinite;
+    }
+
+    .face {
+      width: 90px;
+      height: 80px;
+      background: #ffdfdf;
+      border-radius: 50%;
+      position: relative;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    }
+
+    .ear {
+      width: 30px;
+      height: 30px;
+      background: #ffdfdf;
+      position: absolute;
+      top: -12px;
+      border-radius: 6px;
+    }
+
+    .ear.left { left: 20px; transform: rotate(-20deg); }
+    .ear.right { right: 20px; transform: rotate(20deg); }
+
+    .eye {
+      position: absolute;
+      top: 28px;
+      font-size: 18px;
+    }
+
+    .eye.left { left: 26px; }
+    .eye.right { right: 26px; }
+
+    .mouth {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .cheek {
+      width: 10px;
+      height: 10px;
+      background: #ff8fa3;
+      border-radius: 50%;
+      position: absolute;
+      bottom: 22px;
+      opacity: 0;
+    }
+
+    .cheek.left { left: 16px; }
+    .cheek.right { right: 16px; }
+
+    /* 😳 볼 빨개짐 */
+    .blush .cheek {
+      opacity: 1;
+    }
+
+    /* 😱 놀람 */
+    .shock {
+      animation: shock 0.4s;
+    }
+
+    @keyframes shock {
+      0% { transform: translateY(0) rotate(0); }
+      25% { transform: translateY(-6px) rotate(-3deg); }
+      50% { transform: translateY(-6px) rotate(3deg); }
+      100% { transform: translateY(0) rotate(0); }
+    }
+
+    /* 💓 하트 뿜뿜 */
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      animation: pop 2s ease-out forwards;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    @keyframes pop {
+      from { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 0; transform: translateY(-80px) scale(1.6); }
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
   <div class="card" id="card">
-    <h1>💌 질문 있음</h1>
+
+    <div class="character" id="cat">
+      <div class="ear left"></div>
+      <div class="ear right"></div>
+      <div class="face">
+        <span class="eye left">•</span>
+        <span class="eye right">•</span>
+        <span class="mouth">︶</span>
+        <span class="cheek left"></span>
+        <span class="cheek right"></span>
+      </div>
+    </div>
+
+    <h1>💌 Jaewon Will you be my Valentine?</h1>
     <p>나랑 발렌타인데이<br>같이 보낼래?</p>
 
     <div class="buttons">
-      <button class="yes" onclick="yes()">좋아 💕</button>
-      <button class="no" id="noBtn">싫어</button>
+      <button class="yes" onclick="yes()">Yes ♥︎</button>
+      <button class="no" id="noBtn">No</button>
     </div>
   </div>
 
-  <script>
-    const noBtn = document.getElementById("noBtn");
+<script>
+  const noBtn = document.getElementById("noBtn");
+  const cat = document.getElementById("cat");
 
-    function moveNoButton() {
-      const x = Math.random() * 200 - 100;
-      const y = Math.random() * 80 - 40;
-      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+  function moveNoButton() {
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 80 - 40;
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
+
+    cat.classList.add("shock");
+    setTimeout(() => cat.classList.remove("shock"), 400);
+  }
+
+  noBtn.addEventListener("mouseenter", moveNoButton);
+  noBtn.addEventListener("touchstart", moveNoButton);
+
+  function yes() {
+    noBtn.style.pointerEvents = "none";
+    cat.classList.add("blush");
+
+    for (let i = 0; i < 6; i++) {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💓";
+      heart.style.left = 50 + Math.random() * 40 - 20 + "%";
+      heart.style.top = "40px";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
     }
 
-    // PC: 마우스 올리면 도망
-    noBtn.addEventListener("mouseenter", moveNoButton);
-
-    // 모바일: 터치하려 하면 도망
-    noBtn.addEventListener("touchstart", moveNoButton);
-
-    function yes() {
+    setTimeout(() => {
       document.getElementById("card").innerHTML = `
+        <div class="character blush">
+          <div class="ear left"></div>
+          <div class="ear right"></div>
+          <div class="face">
+            <span class="eye left">•</span>
+            <span class="eye right">•</span>
+            <span class="mouth">♥︎</span>
+            <span class="cheek left"></span>
+            <span class="cheek right"></span>
+          </div>
+        </div>
         <h1>💖 성공 💖</h1>
-        <p>이건 이미 정해진 미래였다…</p>
+        <p>고양이는 이미 마음을 줬다 😽</p>
       `;
-    }
-  </script>
+    }, 600);
+  }
+</script>
 
 </body>
 </html>

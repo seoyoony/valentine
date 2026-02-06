@@ -17,21 +17,36 @@
 
     .card {
       background: white;
-      padding: 32px 24px;
-      border-radius: 24px;
+      padding: 40px 24px 48px;
+      border-radius: 28px;
       text-align: center;
       box-shadow: 0 20px 40px rgba(0,0,0,0.15);
       width: min(1100px, 90vw);
       position: relative;
-      overflow: visible;
     }
 
-    h1 { margin-bottom: 12px; }
-    p { margin-bottom: 20px; }
+    h1 {
+      margin: 16px 0 8px;
+      font-size: 28px;
+    }
+
+    p {
+      margin-bottom: 28px;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    /* 😺 이모지 얼굴 */
+    .emoji-face {
+      font-size: 72px;
+      margin-bottom: 12px;
+      animation: float 2.5s ease-in-out infinite;
+    }
 
     .buttons {
       position: relative;
-      height: 120px;
+      height: 140px;
+      margin-top: 12px;
     }
 
     button {
@@ -42,120 +57,34 @@
       transition: transform 0.2s ease;
     }
 
+    /* 💖 YES 왕 크게 */
     .yes {
       background: #ff4d6d;
       color: white;
-      padding: 16px 40px;
-      font-size: 18px;
+      padding: 22px 64px;
+      font-size: 22px;
+      font-weight: 700;
       left: 50%;
-      bottom: 10px;
+      bottom: 0;
       transform: translateX(-50%);
+      box-shadow: 0 12px 24px rgba(255,77,109,0.4);
     }
 
+    /* 🙈 NO – 보이긴 하는데 존재감 약하게 */
     .no {
-      background: #ddd;
-      color: #555;
+      background: #e5e5e5;
+      color: #777;
       padding: 10px 18px;
       font-size: 14px;
-      right: 20px;
-      top: 10px;
-    }
-
-    /* 🐱 CSS 고양이 (처음 화면용) */
-    .character {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      margin-bottom: 20px;
-      animation: float 2.5s ease-in-out infinite;
-    }
-
-    .face {
-      width: 96px;
-      height: 78px;
-      background: #ffdfdf;
-      border-radius: 50% 50% 45% 45%;
-      position: relative;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-    }
-
-    .ear {
-      width: 0;
-      height: 0;
-      border-left: 16px solid transparent;
-      border-right: 16px solid transparent;
-      border-bottom: 26px solid #ffdfdf;
-      position: absolute;
-      top: -20px;
-    }
-
-    .ear.left { left: 18px; transform: rotate(-10deg); }
-    .ear.right { right: 18px; transform: rotate(10deg); }
-
-    .eye {
-      position: absolute;
-      top: 28px;
-      font-size: 18px;
-    }
-
-    .eye.left { left: 26px; }
-    .eye.right { right: 26px; }
-
-    .mouth {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .cheek {
-      width: 10px;
-      height: 10px;
-      background: #ff8fa3;
-      border-radius: 50%;
-      position: absolute;
-      bottom: 22px;
-      opacity: 0;
-    }
-
-    .cheek.left { left: 16px; }
-    .cheek.right { right: 16px; }
-
-    .whisker {
-      position: absolute;
-      width: 18px;
-      height: 1.5px;
-      background: #d88;
-      top: 42px;
-    }
-
-    .whisker.left {
-      left: -10px;
-      box-shadow: 0 -6px 0 #d88, 0 6px 0 #d88;
-    }
-
-    .whisker.right {
-      right: -10px;
-      box-shadow: 0 -6px 0 #d88, 0 6px 0 #d88;
-    }
-
-    .blush .cheek { opacity: 1; }
-
-    .shock {
-      animation: shock 0.4s;
-    }
-
-    @keyframes shock {
-      0% { transform: translateY(0) rotate(0); }
-      25% { transform: translateY(-6px) rotate(-3deg); }
-      50% { transform: translateY(-6px) rotate(3deg); }
-      100% { transform: translateY(0) rotate(0); }
+      right: 12px;
+      top: 0;
+      opacity: 0.8;
     }
 
     /* 💓 하트 */
     .heart {
       position: absolute;
-      font-size: 20px;
+      font-size: 22px;
       animation: pop 2s ease-out forwards;
       z-index: 10;
       pointer-events: none;
@@ -168,7 +97,7 @@
 
     @keyframes float {
       0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
+      50% { transform: translateY(-10px); }
       100% { transform: translateY(0); }
     }
 
@@ -185,19 +114,7 @@
 
   <div class="card" id="card">
 
-    <div class="character" id="cat">
-      <div class="ear left"></div>
-      <div class="ear right"></div>
-      <div class="face">
-        <span class="eye left">•</span>
-        <span class="eye right">•</span>
-        <span class="mouth">︶</span>
-        <span class="cheek left"></span>
-        <span class="cheek right"></span>
-        <span class="whisker left"></span>
-        <span class="whisker right"></span>
-      </div>
-    </div>
+    <div class="emoji-face" id="face">😺</div>
 
     <h1>💌 Jaewon Will you be my Valentine?</h1>
     <p>재원아 나랑 발렌타인데이<br>같이 보낼래?</p>
@@ -210,15 +127,15 @@
 
 <script>
   const noBtn = document.getElementById("noBtn");
-  const cat = document.getElementById("cat");
+  const face = document.getElementById("face");
 
   function moveNoButton() {
     const x = Math.random() * 200 - 100;
     const y = Math.random() * 80 - 40;
     noBtn.style.transform = `translate(${x}px, ${y}px)`;
 
-    cat.classList.add("shock");
-    setTimeout(() => cat.classList.remove("shock"), 400);
+    face.textContent = "😳";
+    setTimeout(() => face.textContent = "😺", 300);
   }
 
   noBtn.addEventListener("mouseenter", moveNoButton);
@@ -226,9 +143,9 @@
 
   function yes() {
     noBtn.style.pointerEvents = "none";
-    cat.classList.add("blush");
+    face.textContent = "🥰";
 
-    for (let i = 0; i < 6; i++) {
+    for (let i = 0; i < 8; i++) {
       const heart = document.createElement("div");
       heart.className = "heart";
       heart.innerText = "💓";

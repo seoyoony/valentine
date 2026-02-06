@@ -61,7 +61,7 @@
       top: 10px;
     }
 
-    /* 🐱 고양이 캐릭터 */
+    /* 🐱 CSS 고양이 (처음 화면용) */
     .character {
       position: relative;
       display: flex;
@@ -79,7 +79,6 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     }
 
-    /* 삼각형 귀 */
     .ear {
       width: 0;
       height: 0;
@@ -122,7 +121,6 @@
     .cheek.left { left: 16px; }
     .cheek.right { right: 16px; }
 
-    /* 수염 */
     .whisker {
       position: absolute;
       width: 18px;
@@ -141,12 +139,8 @@
       box-shadow: 0 -6px 0 #d88, 0 6px 0 #d88;
     }
 
-    /* 😳 볼 빨개짐 */
-    .blush .cheek {
-      opacity: 1;
-    }
+    .blush .cheek { opacity: 1; }
 
-    /* 😱 놀람 */
     .shock {
       animation: shock 0.4s;
     }
@@ -177,6 +171,14 @@
       50% { transform: translateY(-8px); }
       100% { transform: translateY(0); }
     }
+
+    /* 🎉 성공 GIF */
+    .success-gif {
+      width: 260px;
+      max-width: 80%;
+      margin: 20px auto;
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -198,7 +200,7 @@
     </div>
 
     <h1>💌 Jaewon Will you be my Valentine?</h1>
-    <p>나랑 발렌타인데이<br>같이 보낼래?</p>
+    <p>재원아 나랑 발렌타인데이<br>같이 보낼래?</p>
 
     <div class="buttons">
       <button class="yes" onclick="yes()">Yes ♥︎</button>
@@ -238,21 +240,9 @@
 
     setTimeout(() => {
       document.getElementById("card").innerHTML = `
-        <div class="character blush">
-          <div class="ear left"></div>
-          <div class="ear right"></div>
-          <div class="face">
-            <span class="eye left">•</span>
-            <span class="eye right">•</span>
-            <span class="mouth">♥︎</span>
-            <span class="cheek left"></span>
-            <span class="cheek right"></span>
-            <span class="whisker left"></span>
-            <span class="whisker right"></span>
-          </div>
-        </div>
-        <h1>💖 성공 💖</h1>
-        <p>고양이는 이미 마음을 줬다 😽</p>
+        <h1>💖 Success 💖</h1>
+        <img src="happy-cat.gif" alt="Happy Cat" class="success-gif">
+        <p>😊 Happy! Happy! Happy! 😊</p>
       `;
     }, 600);
   }

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>💘 Valentine</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffe4e1);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: system-ui, -apple-system;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 32px 24px;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      width: 300px;
+      position: relative;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+    }
+
+    p {
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 120px;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      position: absolute;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+      padding: 16px 36px;
+      font-size: 18px;
+      left: 50%;
+      bottom: 10px;
+      transform: translateX(-50%);
+    }
+
+    .no {
+      background: #ddd;
+      color: #555;
+      padding: 6px 12px;
+      font-size: 12px;
+      right: 20px;
+      top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" id="card">
+    <h1>💌 질문 있음</h1>
+    <p>나랑 발렌타인데이<br>같이 보낼래?</p>
+
+    <div class="buttons">
+      <button class="yes" onclick="yes()">좋아 💕</button>
+      <button class="no" id="noBtn">싫어</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+
+    function moveNoButton() {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 80 - 40;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    // PC: 마우스 올리면 도망
+    noBtn.addEventListener("mouseenter", moveNoButton);
+
+    // 모바일: 터치하려 하면 도망
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    function yes() {
+      document.getElementById("card").innerHTML = `
+        <h1>💖 성공 💖</h1>
+        <p>이건 이미 정해진 미래였다…</p>
+      `;
+    }
+  </script>
+
+</body>
+</html>
